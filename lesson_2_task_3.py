@@ -7,4 +7,4 @@ def square(side):
     else:
         print(int(side * side + 1))
 
-square(1.1)
+square(1.5)
