@@ -1,14 +1,19 @@
 #x = 'vklad'
 #y = 'srok'
-bonus = 0.1
+#bonus = 0.1
 
-def bank(x, y):
+#def bank(x, y):
 
-    for y in range(1, (y + 1)):
-        print((x * bonus + x) * y) 
+#    for y in range(1, (y + 1), 1):
+#        b = x * bonus + x 
+#        c = b * bonus + x
+#        print(c)
 
-bank(100, 1)
+#bank(100, 3)
 
-# написать функцию bank, принимающую аргументы X и Y и возвращающую сумму, которая будет на счету пользователя спустя Y лет
+s = int(input())
+p = int(input())
+k = int(input())
 
-# Не понимаю, почему цикл не выполняется...
+total = s * (1 + p/100) ** k
+print(total)
