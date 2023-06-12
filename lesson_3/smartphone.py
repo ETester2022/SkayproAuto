@@ -7,4 +7,3 @@ class Smartphone:
     
     def instance(self):
         print(self.marka, self.model, self.number)
-
