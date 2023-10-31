@@ -14,6 +14,7 @@ def test_string_utils_capitilize_positive(data, result):
     var1 = string_utils.capitilize(data)
     assert var1 == result
 
+@pytest.mark.function1
 @pytest.mark.parametrize('data, result', [  
     ('', ''), 
     (' ', ' ') 
@@ -26,6 +27,7 @@ def test_string_utils_capitilize_negative(data, result):
 # Тест функция №2
 @pytest.mark.function2
 @pytest.mark.parametrize('data, result', [ 
+    ('тест', 'тест'),
     (' Тест', 'Тест'), 
     (' тест', 'тест'), 
     (' 123', '123'), 
@@ -36,9 +38,10 @@ def test_string_utils_trim_positive(data, result):
     var1 = string_utils.trim(data)
     assert var1 == result
 
+@pytest.mark.function2
 @pytest.mark.parametrize('data, result', [  
     ('', ''),
-    ('тест', 'тест') 
+    (1, 1)
     ])
 def test_string_utils_trim_negative(data, result):
     string_utils = StringUtils()
@@ -48,11 +51,11 @@ def test_string_utils_trim_negative(data, result):
 # Тест функция №3
 # pytest -m function3
 @pytest.mark.function3
-@pytest.mark.parametrize('data, result', [ 
-    ('Один,Два,Три', ['Один', 'Два', 'Три']), 
-#    ('Один:Два:Три', ['Один', 'Два', 'Три']),  
+@pytest.mark.parametrize('data, deli, result', [ 
+    ('Один,Два,Три', ',', ['Один', 'Два', 'Три']), 
+    ('Один:Два:Три', ':', ['Один', 'Два', 'Три']),  
     ])
-def test_string_utils_to_list_positive(data, result):
+def test_string_utils_to_list_positive(data, deli, result):
     string_utils = StringUtils()
-    var1 = string_utils.to_list(data)
+    var1 = string_utils.to_list(data, deli)
     assert var1 == result
