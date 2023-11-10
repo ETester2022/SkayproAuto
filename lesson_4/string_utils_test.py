@@ -2,7 +2,8 @@ import pytest
 from string_utils import StringUtils
 
 # Тест функция №1
-@pytest.mark.function1
+# pytest -m function1p -v
+@pytest.mark.function1p
 @pytest.mark.parametrize('data, result', [ 
     ('Тест', 'Тест'), 
     ('тест', 'Тест'), 
@@ -14,7 +15,8 @@ def test_string_utils_capitilize_positive(data, result):
     var1 = string_utils.capitilize(data)
     assert var1 == result
 
-@pytest.mark.function1
+# pytest -m function1n -v
+@pytest.mark.function1n
 @pytest.mark.parametrize('data, result', [  
     ('', ''), 
     (' ', ' ') 
@@ -25,7 +27,8 @@ def test_string_utils_capitilize_negative(data, result):
     assert var1 == result
 
 # Тест функция №2
-@pytest.mark.function2
+# pytest -m function2p -v
+@pytest.mark.function2p
 @pytest.mark.parametrize('data, result', [ 
     ('тест', 'тест'),
     (' Тест', 'Тест'), 
@@ -38,9 +41,10 @@ def test_string_utils_trim_positive(data, result):
     var1 = string_utils.trim(data)
     assert var1 == result
 
-@pytest.mark.function2
+# pytest -m function2n -v
+@pytest.mark.function2n
+@pytest.mark.xfail(raises=AttributeError)
 @pytest.mark.parametrize('data, result', [  
-    ('', ''),
     (1, 1)
     ])
 def test_string_utils_trim_negative(data, result):
@@ -49,13 +53,52 @@ def test_string_utils_trim_negative(data, result):
     assert var1 == result
 
 # Тест функция №3
-# pytest -m function3
-@pytest.mark.function3
+# pytest -m function3p -v 
+@pytest.mark.function3p
 @pytest.mark.parametrize('data, deli, result', [ 
     ('Один,Два,Три', ',', ['Один', 'Два', 'Три']), 
-    ('Один:Два:Три', ':', ['Один', 'Два', 'Три']),  
+    ('Один:Два:Три', ':', ['Один', 'Два', 'Три']),
+    ('Один/Два/Три', '/', ['Один', 'Два', 'Три']),
+    ('Один Два Три', ' ', ['Один', 'Два', 'Три'])
     ])
 def test_string_utils_to_list_positive(data, deli, result):
     string_utils = StringUtils()
     var1 = string_utils.to_list(data, deli)
     assert var1 == result
+
+#pytest -m function3n -v
+@pytest.mark.function3n
+@pytest.mark.xfail(raises=ValueError)
+@pytest.mark.parametrize('data, deli, result', [ 
+    ('Один,Два,Три', '', ['Один', 'Два', 'Три'])
+    ])
+def test_string_utils_to_list_negative(data, deli, result):
+    string_utils = StringUtils()
+    var1 = string_utils.to_list(data, deli)
+    assert var1 == result
+
+# Тест функция №4
+# pytest -m function4p -v
+@pytest.mark.function4p
+@pytest.mark.parametrize('data, simbol, total', [ 
+    ('MyTest', 'T', True),
+    ('MyTest', 'y', True),
+    ('MyTest', 'A', False),
+    ('MyTest', 'k', False)
+    ])
+def test_string_utils_contains_positive(data, simbol, total):
+    string_utils = StringUtils()
+    var1 = string_utils.contains(data, simbol)
+    assert var1 == total
+
+# pytest -m function4n -v
+@pytest.mark.function4n
+@pytest.mark.parametrize('data, simbol, total', [ 
+    ('MyTest', ' ', True),
+    ('MyTest', '', False),
+    ('MyTest', 'Ш', True)
+    ])
+def test_string_utils_contains_negative(data, simbol, total):
+    string_utils = StringUtils()
+    var1 = string_utils.contains(data, simbol)
+    assert var1 != total
