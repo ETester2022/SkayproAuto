@@ -102,3 +102,35 @@ def test_string_utils_contains_negative(data, simbol, total):
     string_utils = StringUtils()
     var1 = string_utils.contains(data, simbol)
     assert var1 != total
+
+# Тест функция №5
+# pytest -m function5p -v
+@pytest.mark.function5p
+@pytest.mark.parametrize('data, del_data, result', [ 
+    ('SkyPro', 'k', 'SyPro'), 
+    ('SkyPro', 'yPr', 'Sko'),
+    ('SkyPro', 'S', 'kyPro'),
+    ('SkyPro', 'o', 'SkyPr'),
+    ('SkyPro', 'SkyPro', ''),
+    ('Sky Pro', ' ', 'SkyPro')
+    ])
+def test_string_utils_delete_symbol_positive(data, del_data, result):
+    string_utils = StringUtils()
+    var1 = string_utils.delete_symbol(data, del_data)
+    assert var1 == result
+
+# pytest -m function5n -v
+@pytest.mark.function5n
+@pytest.mark.parametrize('data, del_data, result', [ 
+    ('SkyPro', ' ', 'SkyPro'), 
+    ('SkyPro', 'SP', 'SkyPro'),
+    ('SkyPro', '4', 'SkyPro'),
+    ('SkyPro', 'ш', 'SkyPro')
+    ])
+def test_string_utils_delete_symbol_negative(data, del_data, result):
+    string_utils = StringUtils()
+    var1 = string_utils.delete_symbol(data, del_data)
+    assert var1 == result
+
+# Тест функция №6
+# pytest -m function6p -v
