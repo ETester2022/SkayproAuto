@@ -134,3 +134,29 @@ def test_string_utils_delete_symbol_negative(data, del_data, result):
 
 # Тест функция №6
 # pytest -m function6p -v
+@pytest.mark.function6p
+@pytest.mark.parametrize('data, search_data, result', [ 
+    ('SkyPro', 'S', True),
+    ('Cat', 'C', True),
+    ('Dog', 'D', True),
+    ('SkyPro', 'P', False),
+    ('Cat', 'D', False),
+    ])
+def test_string_utils_starts_with_positive(data, search_data, result):
+    string_utils = StringUtils()
+    var1 = string_utils.starts_with(data, search_data)
+    assert var1 == result
+
+# pytest -m function6n -v
+@pytest.mark.function6n
+@pytest.mark.parametrize('data, search_data, result', [ 
+    ('Cat', ' ', True),
+    ('Cat', '1', True)
+    ])
+def test_string_utils_starts_with_negative(data, search_data, result):
+    string_utils = StringUtils()
+    var1 = string_utils.starts_with(data, search_data)
+    assert var1 != result
+
+# Тест функция №7
+# pytest -m function7p -v
