@@ -187,3 +187,30 @@ def test_string_utils_end_with_negative(data, search_data, result):
 
 # Тест функция №8
 # pytest -m function8p -v
+@pytest.mark.function8p
+@pytest.mark.parametrize('data, result', [ 
+    ('', True),
+    (' ', True),
+    ('ф', False),
+    ('F', False),
+    ('0', False)
+    ])
+def test_string_utils_is_empty_positive(data, result):
+    string_utils = StringUtils()
+    var1 = string_utils.is_empty(data)
+    assert var1 == result
+
+# pytest -m function8n -v
+@pytest.mark.function8n
+@pytest.mark.parametrize('data, result', [ 
+    ('a b', True),
+    (' b', True),
+    ('a ', True)
+    ])
+def test_string_utils_is_empty_negative(data, result):
+    string_utils = StringUtils()
+    var1 = string_utils.is_empty(data)
+    assert var1 != result 
+
+# Тест функция №9
+# pytest -m function9p -v
