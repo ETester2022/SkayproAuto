@@ -160,3 +160,30 @@ def test_string_utils_starts_with_negative(data, search_data, result):
 
 # Тест функция №7
 # pytest -m function7p -v
+@pytest.mark.function7p
+@pytest.mark.parametrize('data, search_data, result', [ 
+    ('SkyPro', 'o', True),
+    ('Cat', 't', True),
+    ('123', '3', True),
+    ('SkyPro', 'P', False),
+    ('Cat', 'D', False),
+    ])
+def test_string_utils_end_with_positive(data, search_data, result):
+    string_utils = StringUtils()
+    var1 = string_utils.end_with(data, search_data)
+    assert var1 == result
+
+# pytest -m function7n -v  
+@pytest.mark.function7n
+@pytest.mark.parametrize('data, search_data, result', [ 
+    ('Cat', ' ', True),
+    ('Cat', '1', True),
+    ('Cat', 'T', True)
+    ])
+def test_string_utils_end_with_negative(data, search_data, result):
+    string_utils = StringUtils()
+    var1 = string_utils.end_with(data, search_data)
+    assert var1 != result 
+
+# Тест функция №8
+# pytest -m function8p -v
