@@ -214,3 +214,25 @@ def test_string_utils_is_empty_negative(data, result):
 
 # Тест функция №9
 # pytest -m function9p -v
+@pytest.mark.function9p
+@pytest.mark.parametrize('data, deli, result', [ 
+    (['Один', 'Два', 'Три'], ', ', 'Один, Два, Три'), 
+    ([1,2,3,4], ': ', '1: 2: 3: 4'),
+    (['Sky','Pro'], '-', 'Sky-Pro'),
+    ([], ', ', ''),
+    ([1,2,3,4], ' ', '1 2 3 4')
+    ])
+def test_string_utils_list_to_string_positive(data, deli, result):
+    string_utils = StringUtils()
+    var1 = string_utils.list_to_string(data, deli)
+    assert var1 == result
+
+# pytest -m function9n -v
+@pytest.mark.function9n
+@pytest.mark.parametrize('data, deli, result', [ 
+    ([1,2,3,4], '', 1234)
+    ])
+def test_string_utils_list_to_string_negative(data, deli, result):
+    string_utils = StringUtils()
+    var1 = string_utils.list_to_string(data, deli)
+    assert var1 != result
